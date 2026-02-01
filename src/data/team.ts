@@ -1,3 +1,4 @@
+// src/data/team.ts
 export interface SocialLinks {
   linkedin?: string;
   x?: string; 
@@ -13,7 +14,6 @@ export interface TeamMember {
   socials: SocialLinks;
 }
 
-// the founder will be displayed separately at the top
 export const founder: TeamMember = {
   id: "taha-selim",
   name: "Dr. Taha Selim",
@@ -25,7 +25,6 @@ export const founder: TeamMember = {
   },
 };
 
-// the core team members will be in the grid after
 export const teamMembers: TeamMember[] = [
   {
     id: "asmaa-saafan",

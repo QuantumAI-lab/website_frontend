@@ -1,73 +1,116 @@
 # EgQCC Website Frontend
 
-This is the official frontend repository for the Egypt Quantum Computing Community (EgQCC) website. It is built using **Next.js**, **TypeScript**, and **Tailwind CSS**.  
+Official frontend for the **Egypt Quantum Computing Community (EgQCC)** website, built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS**.
 
-## To Run The Code locally on your machine
+---
 
-### 1.Prerequisites
-Ensure you have **Node.js** installed (Version 18+ recommended).
+## Tech Stack
 
-### 2.Install the Needed Dependencies
-Open your terminal in the project directory and run:
+- **Next.js** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion** (UI animations)
+- **next-themes** (Dark/Light mode)
+- **Lottie** (animations)
+
+---
+
+## Getting Started
+
+### Prerequisites
+- **Node.js v18+** (recommended)
+
+### Installation
+From the project root, install dependencies:
 
 ```bash
 npm install
 # or
 yarn install
-```
-### 3.Run the server
-Then to start the local server run:
-```bash
+Run the Development Server
 npm run dev
 # or
 yarn dev
-```
-### 4.Open in browser 
-Visit http://localhost:3000 to view the website.
+Open in Browser
+Visit:
 
-## Project Structure
-Here is an overview of the files and folders' structure in this project:
+http://localhost:3000
 
-```bash
+Project Structure
 .
-├── public/                 # Static assets (images, fonts, icons)
-│   └── assets/             # Project-specific images (event banners, etc.)
+├── public/                      # Static assets (images, icons, animations)
+│   ├── assets/                  # Project-specific images (logos, event banners, etc.)
+│   └── animations/              # Lottie JSON animations (if applicable)
 │
 ├── src/
-│   ├── app/                # App Router (Pages & Layouts)
-│   │   ├── events/         # Events Page
-│   │   ├── resources/      # Resources Page
-│   │   ├── layout.tsx      # Main layout (Navbar + Footer wrap)
-│   │   └── page.tsx        # Homepage (Landing)
+│   ├── app/                     # App Router (routes + layouts)
+│   │   ├── events/              # /events page
+│   │   ├── resources/           # /resources page
+│   │   ├── team/                # /team page (if present)
+│   │   ├── layout.tsx           # Root layout (Navbar/Footer wrappers)
+│   │   └── page.tsx             # Homepage
 │   │
-│   ├── components/          # Reusable UI Components
-│   │   ├── EventCard.tsx    # Card component for individual events
-│   │   ├── EventModal.tsx   # Pop-up modal for event details
-│   │   ├── ResourceCard.tsx # Card component for books/tools/courses
-│   │   ├── Navbar.tsx       # Top navigation bar header
-│   │   └── Footer.tsx       # Website footer
+│   ├── components/              # Reusable UI components
+│   │   ├── EventCard.tsx
+│   │   ├── EventModal.tsx
+│   │   ├── ResourceCard.tsx
+│   │   ├── Navbar.tsx
+│   │   └── Footer.tsx
 │   │
-│   └── data/               # MOCK DATA (Hard-coded content) 
-│       ├── events.ts       # List of upcoming/past events
-│       └── resources.ts    # List of educational resources
-│       └── team.ts         # List of team members data
+│   ├── data/                    # Mock (hard-coded) content
+│   │   ├── events.ts
+│   │   ├── resources.ts
+│   │   └── team.ts
+│   │
+│   └── i18n/                    # Localization utilities (if enabled)
+│       ├── LocaleProvider.tsx
+│       └── messages.ts
 │
-├── .gitignore              # Files ignored by Git
-├── next.config.mjs         # Next.js configuration
-├── tailwind.config.ts      # Tailwind CSS styling configuration
-└── tsconfig.json           # TypeScript configuration
-```
-## Data Handling
-Currently, the website uses static mock data to display events, team members and resources. This allows the frontend to be developed and tested without a running backend.
-### How it works now:
-All data is stored in TypeScript arrays inside the src/data/ folder.  
-Components import this data directly
-### Future Implementation Guide:
-Removing Hard-Coded Data when the backend API is ready and integrated.  
-Replacing the direct import with data fetching methods.  
-Updating cards props to match the new data from the database.  
-Last thing, Delete Mock Data after API connection is verified.  
+├── .gitignore
+├── next.config.mjs              # Next.js configuration
+├── tailwind.config.ts           # Tailwind CSS configuration
+└── tsconfig.json                # TypeScript configuration
+The structure may slightly differ depending on recent refactors, but this reflects the intended architecture.
 
-## Remaining
-Handling "share to" option in event popup hasn't been completely done.  
-Implementing Dashboard and Admin Registeration.  
+Data Handling (Current)
+This frontend currently uses static mock data to support rapid development without requiring a backend.
+
+Data is stored as TypeScript arrays in src/data/
+
+Components import these arrays directly
+
+Planned Backend Integration
+Once the backend API is available:
+
+Replace direct imports from src/data/ with API fetching.
+
+Update component props/types to match the backend response models.
+
+Validate integration end-to-end.
+
+Remove mock data after verification.
+
+Localization (i18n)
+The project supports bilingual UI (Arabic/English) through a lightweight i18n setup:
+
+Locale state is stored in localStorage
+
+lang and dir are applied to <html>
+
+Arabic uses Cairo, English uses Inter (recommended setup)
+
+Roadmap / Remaining Work
+Finalize and polish "Share to" options in the event modal (messaging UX + edge cases).
+
+Implement Dashboard and Admin Registration flow.
+
+Replace mock data with backend integration (API + admin CRUD if required).
+
+Contributing
+Create a feature branch:
+
+git checkout -b feature/your-feature
+Commit with clear messages.
+
+Open a pull request with a short description and screenshots (if UI-related).
+

@@ -1,24 +1,19 @@
+/* // src/app/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @import "tailwindcss";
 
-/*define variables here*/
 @theme {
-  /* define custom font */
   --font-sans: "Inria Sans", sans-serif;
-  /* define custom colors */
-  --color-primary: #05AFC0;   /* cyan */
+  --color-primary: #05AFC0;  
   --color-primary-dark: #048a97;
-  
-  --color-accent: #E4A83C;        /* dijon/gold */
+  --color-accent: #E4A83C;     
   --color-accent-dark: #b8862e;
-  
-  --color-darkbg: #050505;        /* deep black */
+  --color-darkbg: #050505;        
 }
 
-/* darkmode setup */
 @variant dark (&:where(.dark, .dark *));
 
-/* base styles setup */
+
 :root {
   --foreground: #171717;
 }
@@ -31,35 +26,26 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   
-  /*lightmode */
   background-color: #ffffff;
   background-image: 
-    /* Light 1: Top Left - Cyan */
     radial-gradient(circle at 10% 20%, rgba(5, 175, 192, 0.15) 0%, transparent 40%),
-    /* Light 2: Bottom Right - Cyan */
     radial-gradient(circle at 90% 80%, rgba(5, 175, 192, 0.15) 0%, transparent 40%),
-    /* Light 3: Top Right - Faint Cyan */
     radial-gradient(circle at 80% 10%, rgba(5, 175, 192, 0.08) 0%, transparent 40%);
     
-  background-attachment: fixed; /* to keep it static while scrolling */
+  background-attachment: fixed;
   background-size: 100% 100%;
 }
 
-/* darkmode */
 .dark body {
   background-color: #050505; 
   background-image: 
-    /* Light 1: Top Left - Gold */
     radial-gradient(circle at 10% 20%, rgba(228, 168, 60, 0.15) 0%, transparent 40%),
-    /* Light 2: Bottom Right - Gold */
     radial-gradient(circle at 90% 80%, rgba(228, 168, 60, 0.15) 0%, transparent 40%),
-    /* Light 3: Top Right - Faint Gold */
     radial-gradient(circle at 80% 10%, rgba(228, 168, 60, 0.08) 0%, transparent 40%);
     
   background-attachment: fixed;
 }
 
-/* theme visibility helpers */
 .theme-light-image { display: block !important; }
 .theme-dark-image { display: none !important; }
 

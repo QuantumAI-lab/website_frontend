@@ -1,3 +1,4 @@
+// src/components/ResourceCard/ResourceCard.tsx
 "use client";
 
 import Link from "next/link";
@@ -11,7 +12,6 @@ interface ResourceCardProps {
 
 export default function ResourceCard({ resource }: ResourceCardProps) {
   
-  //icon helper based on category
   const getIcon = () => {
     switch (resource.category) {
       case "Books": return <FaBook className="text-4xl text-white" />;
@@ -23,7 +23,6 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
     }
   };
 
-  // Background Gradient helper for "No Image" state
   const getGradient = () => {
     switch (resource.category) {
       case "Books": return "from-orange-400 to-red-500";
@@ -35,7 +34,6 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
     }
   };
 
-  // Badge Color helper
   const getLevelColor = () => {
     switch (resource.level) {
       case "Beginner": return "bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30";
@@ -52,10 +50,8 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
       className="group relative flex flex-col rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden"
     >
       
-      {/*media header*/}
       <div className="relative h-48 w-full overflow-hidden shrink-0">
         {resource.image ? (
-          // if there's image available, show it
           <>
             <Image 
                src={resource.image} 
@@ -66,7 +62,6 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
           </>
         ) : (
-          // if no image, show gradient with icon
           <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getGradient()} group-hover:scale-105 transition-transform duration-500`}>
              <div className="p-4 bg-white/20 backdrop-blur-md rounded-full shadow-inner">
                 {getIcon()}
@@ -74,19 +69,14 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
           </div>
         )}
         
-        {/* category upright badge */}
         <div className="absolute top-4 right-4 z-10">
             <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider text-white bg-black/50 backdrop-blur-md rounded-full border border-white/20">
                 {resource.category}
             </span>
         </div>
       </div>
-
-      {/*content section */}
       <div className="p-6 flex flex-col flex-grow">
-        
-        {/* level badge */}
-        <div className="mb-3">
+                <div className="mb-3">
              <span className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full border ${getLevelColor()}`}>
                 {resource.level}
             </span>

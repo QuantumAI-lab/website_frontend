@@ -1,0 +1,138 @@
+{
+  "hero": {
+    "brand": "EgQCC:",
+    "headlineLine1": "Welcome to Egypt",
+    "headlineLine2": "Quantum Computing Community!",
+    "subtitle": "Fostering collaboration, democratizing knowledge, and empowering the next generation of quantum pioneers across Egypt.",
+    "cta": "Meet the Team"
+  },
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "team": "Team",
+    "resources": "Resources"
+  },
+  "quantumIntro": {
+    "title": "Why",
+    "highlightedWord": "Quantum?",
+    "subtitle": "We are shifting from the era of Bit to the era of Qubit. Here is how quantum computing changes the game.",
+    "features": {
+      "superposition": {
+        "title": "Superposition",
+        "desc": "Unlike classical bits (0 or 1), Qubits can exist in multiple states at once, unlocking parallel processing power beyond imagination."
+      },
+      "entanglement": {
+        "title": "Entanglement",
+        "desc": "Particles linked across space instantly affect each other. Einstein called it 'spooky action at a distance'—we call it the future of communication."
+      },
+      "exponentialSpeed": {
+        "title": "Exponential Speed",
+        "desc": "Solving complex problems in seconds that would take today's supercomputers thousands of years to crack."
+      }
+    }
+  },
+  "services": {
+    "title": "Our Key",
+    "highlightedWord": "Features",
+    "subtitle": "Discover how EgQCC is building the ecosystem for the next generation of quantum pioneers.",
+    "features": {
+      "education": {
+        "title": "Education & Training",
+        "desc": "From seasonal schools to internationally recognized certifications (QBronze, QNickel), we provide world-class training to master quantum computing and AI."
+      },
+      "events": {
+        "title": "Events & Hackathons",
+        "desc": "Join Egypt's National Quantum Hackathon, weekly workshops, and interactive meetups to compete, collaborate, and connect with industry experts."
+      },
+      "universityChapters": {
+        "title": "University Chapters",
+        "desc": "A network of student hubs across Egyptian universities, providing direct access to IBM Quantum, research mentorship, and a global community of innovators."
+      }
+    }
+  },
+
+  "events": {
+    "upcomingTitle": "Upcoming Events",
+    "status": {
+      "open": "Open",
+      "closed": "Closed",
+      "other": "Upcoming"
+    },
+    "card": {
+      "seeDetails": "See Details",
+      "seeMore": "See More"
+    },
+    "modal": {
+      "close": "Close",
+      "about": "About Event",
+      "speakers": "Speakers",
+      "resources": "Resources",
+      "slides": "Slides",
+      "shareTitle": "Share via Message"
+    },
+    "share": {
+      "copyLink": "Copy Link",
+      "copied": "Link copied",
+      "whatsapp": "Send via WhatsApp",
+      "email": "Send via Email",
+      "facebook": "Share on Facebook",
+      "linkedin": "Share on LinkedIn",
+      "text": "Check out this event: {title} by EgQCC!",
+      "emailSubject": "Invitation: {title}",
+      "emailBody": "Hi,\n\nI found this event and thought you might be interested:\n\n{title}\nDate: {date}\nLocation: {location}\n\nSee details here: {url}"
+    }
+  },
+  "footer": {
+    "missionLine1": "EgQCC, Democratizing the Quantum Leap.",
+    "missionLine2": "Our mission is to empower one million students with Quantum Computing by 2026.",
+    "quickLinks": "Quick Links",
+    "connect": "Connect With Us"
+  },
+  "eventsPage": {
+    "titlePrefix": "Our",
+    "titleHighlight": "Events",
+    "loading": "Loading Events...",
+    "emptyState": "No events found matching your criteria.",
+    "resetFilters": "Reset All Filters",
+    "filters": {
+      "searchPlaceholder": "Search events by keyword...",
+      "categoryAll": "All (Category)",
+      "categoryHackathon": "Hackathon",
+      "categoryWorkshop": "Workshop",
+      "categoryLecture": "Lecture",
+      "categoryMeetup": "Meetup",
+      "statusAll": "All (Status)",
+      "statusUpcoming": "Upcoming",
+      "statusOpen": "Open",
+      "statusClosed": "Closed",
+      "sortEarliest": "Earliest Date First",
+      "sortLatest": "Latest Date First"
+    }
+  },
+  "teamPage": {
+    "titlePrefix": "Meet Our",
+    "titleHighlight": "Team",
+    "subtitle": "This archive is made possible by community members who contribute their time and expertise."
+  },
+  "resourcesPage": {
+    "titlePrefix": "Quantum",
+    "titleHighlight": "Resources",
+    "subtitle": "Curated links, books, and tools to help you master quantum computing, whether you are just starting or conducting advanced research.",
+    "emptyState": "No resources found matching your criteria.",
+    "resetFilters": "Reset All Filters",
+    "filters": {
+      "searchPlaceholder": "Search resources...",
+      "categoryAll": "All (Category)",
+      "categoryBooks": "Books",
+      "categoryCourses": "Courses",
+      "categoryTools": "Tools",
+      "categoryCommunity": "Community",
+      "categoryNews": "News",
+      "levelAll": "All (Level)",
+      "levelBeginner": "Beginner",
+      "levelIntermediate": "Intermediate",
+      "levelAdvanced": "Advanced",
+      "levelAllLevels": "All Levels"
+    }
+  }
+}
