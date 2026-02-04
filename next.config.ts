@@ -1,18 +1,11 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  output: 'export',      // Generates an 'out' folder instead of a server build
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export",
   images: {
-    unoptimized: true,   // Required for static export
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    unoptimized: true, // required for GitHub Pages
   },
+  basePath: process.env.NODE_ENV === "production" ? "//website_frontend/" : "",
+  assetPrefix: process.env.NODE_ENV === "production" ? "/website_frontend/" : "",
 };
 
 export default nextConfig;
