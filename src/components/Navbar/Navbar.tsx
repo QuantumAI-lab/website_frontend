@@ -10,6 +10,8 @@ import { FaSun, FaMoon, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
+import logoImg from "../../../public/assets/logo.png";
+
 type NavKey = "home" | "events" | "team" | "resources";
 
 export default function Navbar() {
@@ -46,7 +48,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse z-20">
           <div className="relative w-35 h-20">
-            <Image src="/assets/logo.png" alt="EgQCC Logo" fill className="object-contain" />
+            <Image src={logoImg} alt="EgQCC Logo" fill className="object-contain" />
           </div>
         </Link>
 
