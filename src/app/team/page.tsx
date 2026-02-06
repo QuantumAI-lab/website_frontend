@@ -1,4 +1,4 @@
-// from src/app/team/page.tsx
+// src/app/team/page.tsx
 "use client";
 
 import Image from "next/image";
@@ -7,6 +7,18 @@ import { founder, teamMembers, TeamMember } from "@/data/team";
 import { FaLinkedin, FaTwitter, FaFacebook, FaEnvelope } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
+
+// helper func (Fixes Paths for GitHub Pages)
+const resolveImagePath = (path: string) => {
+  // If it's an external link (http...), leave it alone
+  if (path.startsWith("http")) return path;
+
+  // If we are in Production (GitHub), add the repo prefix
+  // If Localhost, leave empty
+  const prefix = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
+  
+  return `${prefix}${path}`;
+};
 
 const SocialLink = ({ href, icon }: { href?: string; icon: React.ReactNode }) => {
   if (!href) return null;
@@ -23,6 +35,8 @@ const SocialLink = ({ href, icon }: { href?: string; icon: React.ReactNode }) =>
 };
 
 const TeamCard = ({ member, isLarge = false }: { member: TeamMember; isLarge?: boolean }) => {
+  const imageUrl = resolveImagePath(member.image);
+
   return (
     <div
       className={`
@@ -37,7 +51,7 @@ const TeamCard = ({ member, isLarge = false }: { member: TeamMember; isLarge?: b
           ${isLarge ? "w-48 h-48 mb-6" : "w-32 h-32 mb-4"}
         `}
       >
-        <Image src={member.image} alt={member.name} fill className="object-cover" />
+        <Image src={imageUrl} alt={member.name} fill className="object-cover" />
       </div>
 
       <h3 className={`font-bold text-gray-900 dark:text-white ${isLarge ? "text-3xl" : "text-xl"}`}>

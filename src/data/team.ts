@@ -100,6 +100,16 @@ export const teamMembers: TeamMember[] = [
     },
   },
   {
+    id: "nada-ahmed",
+    name: "Nada Ahmed",
+    role: "IT & Web Development Unit Co-Director",
+    image: "/assets/contributors/nada-ahmed.jpeg",
+    socials: {
+      email: "mailto:nada-h-ahmed@outlook.com",
+      linkedin: "https://www.linkedin.com/in/nada-ahmed-0242a12b2",
+    },
+  },
+  {
     id: "ahmed-saad",
     name: "Ahmed Saad El Fiky",
     role: "QML Lab Coordinator",

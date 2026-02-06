@@ -1,10 +1,20 @@
-// src/components/ResourceCard/ResourceCard.tsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { Resource } from "@/data/resources";
 import { FaBook, FaGraduationCap, FaTools, FaUsers, FaNewspaper, FaExternalLinkAlt } from "react-icons/fa";
+
+// helper func (Fixes Paths for GitHub Pages)
+const resolveImagePath = (path: string) => {
+  // If it's an external link (http...), leave it alone
+  if (path.startsWith("http")) return path;
+
+  // If we are in Production (GitHub), add the repo prefix
+  const prefix = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
+  
+  return `${prefix}${path}`;
+};
 
 interface ResourceCardProps {
   resource: Resource;
@@ -54,7 +64,7 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
         {resource.image ? (
           <>
             <Image 
-               src={resource.image} 
+               src={resolveImagePath(resource.image)} 
                alt={resource.title}
                fill
                className="object-cover transition-transform duration-500 group-hover:scale-110"
