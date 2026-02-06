@@ -1,4 +1,3 @@
-// src/components/EventModal/EventModal.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -21,24 +20,67 @@ import {
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
+// import default image as module to get correct path (fixes GitHub Pages issue)
+import defaultEventImg from "../../../public/assets/event-default.png";
+
 interface EventModalProps {
   event: Event | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
+// 2. HELPER FUNCTION (Fixes Paths for GitHub Pages)
+const resolveImagePath = (path: string | undefined) => {
+  // If no image path exists in the data, return the imported default object
+  if (!path) return defaultEventImg;
+  // If it's an external link (http...), leave it alone
+  if (path.startsWith("http")) return path;
+  // If we are in Production (GitHub), add the repo prefix
+  const prefix = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
+
+  // Return fixed path (e.g., "/website_frontend/assets/event1.jpg")
+  return `${prefix}${path}`;
+};
+
 export default function EventModal({ event, isOpen, onClose }: EventModalProps) {
   const { locale, t } = useI18n();
   const [copied, setCopied] = useState(false);
 
-  if (!event || !isOpen) return null;
-
-  const imageUrl = event.image || "/assets/event-default.png";
+  // SAFE EXTRACTION START 
+  const eventTitle = event?.title || "";
+  const eventDate = event?.date || "";
+  const eventLocation = event?.location || "";
+  const eventId = event?.id || "";
 
   const shareUrl =
     typeof window !== "undefined"
-      ? `${window.location.origin}/events?id=${event.id}`
+      ? `${window.location.origin}/events?id=${eventId}`
       : "";
+
+  const shareText = useMemo(
+    () => t.events.share.text.replace("{title}", eventTitle),
+    [t, eventTitle]
+  );
+
+  const emailSubject = useMemo(
+    () => t.events.share.emailSubject.replace("{title}", eventTitle),
+    [t, eventTitle]
+  );
+
+  const emailBody = useMemo(() => {
+    return t.events.share.emailBody
+      .replace("{title}", eventTitle)
+      .replace("{date}", eventDate)
+      .replace("{location}", eventLocation)
+      .replace("{url}", shareUrl);
+  }, [t, eventTitle, eventDate, eventLocation, shareUrl]);
+  // SAFE EXTRACTION END 
+
+  // 3. CONDITIONAL RETURN (Must be AFTER hooks)
+  if (!event || !isOpen) return null;
+
+  // helper to get img url
+  const imageUrl = resolveImagePath(event.image);
 
   const statusLabel =
     event.status === "Open"
@@ -46,24 +88,6 @@ export default function EventModal({ event, isOpen, onClose }: EventModalProps) 
       : event.status === "Closed"
       ? t.events.status.closed
       : t.events.status.other;
-
-  const shareText = useMemo(
-    () => t.events.share.text.replace("{title}", event.title),
-    [t, event.title]
-  );
-
-  const emailSubject = useMemo(
-    () => t.events.share.emailSubject.replace("{title}", event.title),
-    [t, event.title]
-  );
-
-  const emailBody = useMemo(() => {
-    return t.events.share.emailBody
-      .replace("{title}", event.title)
-      .replace("{date}", event.date)
-      .replace("{location}", event.location)
-      .replace("{url}", shareUrl);
-  }, [t, event.title, event.date, event.location, shareUrl]);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(shareUrl);
@@ -88,6 +112,7 @@ export default function EventModal({ event, isOpen, onClose }: EventModalProps) 
         className="relative w-full max-w-2xl bg-white dark:bg-[#121212] rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
       >
         <div className="relative h-48 md:h-64 w-full shrink-0">
+          {/* use url */}
           <Image src={imageUrl} alt={event.title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 

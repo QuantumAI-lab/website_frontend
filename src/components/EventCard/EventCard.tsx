@@ -1,4 +1,3 @@
-// src/components/EventCard/EventCard.tsx
 "use client";
 
 import Image from "next/image";
@@ -8,11 +7,28 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
+// default image import is moved to EventModal, since it's only used there. EventCard will receive the resolved URL from EventModal, ensuring consistent image handling across both components.
+import defaultEventImg from "../../../public/assets/event-default.png";
+
 interface EventCardProps {
   event: Event;
   disableLink?: boolean;
   onOpen?: () => void;
 }
+
+// helper to resolve image paths, handling both external URLs and local paths with a fallback to a default image
+const resolveImagePath = (path: string | undefined) => {
+  // If no path, use the imported default image
+  if (!path) return defaultEventImg;
+
+  // If it is an external link, leave it alone
+  if (path.startsWith("http")) return path;
+
+  // If in Production (GitHub), add the repo prefix
+  const prefix = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
+  
+  return `${prefix}${path}`;
+};
 
 export default function EventCard({
   event,
@@ -20,7 +36,8 @@ export default function EventCard({
   onOpen,
 }: EventCardProps) {
   const { t } = useI18n();
-  const imageUrl = event.image || "/assets/event-default.png";
+
+  const imageUrl = resolveImagePath(event.image);
 
   const statusLabel =
     event.status === "Open"
