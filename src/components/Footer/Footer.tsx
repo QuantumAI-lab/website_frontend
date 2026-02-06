@@ -7,6 +7,8 @@ import { FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
+import logoImg from "../../../public/assets/logo.png";
+
 type NavKey = "home" | "events" | "team" | "resources";
 
 export default function Footer() {
@@ -29,7 +31,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
               <div className="relative w-16 h-16">
                 <Image
-                  src="/assets/logo.png"
+                  src={logoImg}
                   alt="EgQCC Logo"
                   fill
                   className="object-contain"
