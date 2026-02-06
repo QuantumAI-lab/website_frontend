@@ -32,7 +32,9 @@ export default function Hero() {
   return (
     <section className="relative w-full min-h-[90vh] overflow-hidden bg-transparent transition-colors duration-300 px-6 md:px-12 pt-32 md:pt-20 pb-12 flex flex-col md:flex-row items-center justify-between">
       {/* Content */}
-      <div className="w-full md:w-1/2 z-10 md:pl-10 lg:pl-20">
+      {/* FIX: Changed 'md:pl-10 lg:pl-20' to 'md:ps-10 lg:ps-20' (Padding Start).
+          This ensures padding is on the Left for English and on the Right for Arabic. */}
+      <div className="w-full md:w-1/2 z-10 md:ps-10 lg:ps-20">
         <motion.h1
           {...motionTitle}
           className="text-4xl md:text-4xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white"
@@ -56,7 +58,8 @@ export default function Hero() {
               className="flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-accent hover:bg-yellow-500 text-black text-lg md:text-xl font-bold rounded-full transition-transform hover:scale-105 shadow-[0_0_20px_rgba(228,168,60,0.4)]"
             >
               {t.hero.cta}
-              <span className="text-2xl">→</span>
+              {/* FIX: Added 'rtl:rotate-180' to flip the arrow in Arabic */}
+              <span className="text-2xl rtl:rotate-180">→</span>
             </button>
           </Link>
         </div>

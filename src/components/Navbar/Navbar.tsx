@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { FaSun, FaMoon, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
@@ -17,6 +17,13 @@ export default function Navbar() {
   const { locale, setLocale, t } = useI18n();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsClient(true), 0);
+    return () => clearTimeout(timer); // Cleanup timer to prevent memory leaks
+  }, []);
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   const toggleMenu = () => setIsMenuOpen((v) => !v);
@@ -82,10 +89,16 @@ export default function Navbar() {
             className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             aria-label="Toggle Theme"
           >
-            {theme === "dark" ? (
-              <FaSun className="text-accent text-xl" />
+            {/* 3. 'isClient' check is applied here */}
+            {isClient ? (
+              theme === "dark" ? (
+                <FaSun className="text-accent text-xl" />
+              ) : (
+                <FaMoon className="text-primary text-xl" />
+              )
             ) : (
-              <FaMoon className="text-primary text-xl" />
+              // Placeholder for Server Side Render
+              <div className="w-5 h-5" /> 
             )}
           </button>
           <button
