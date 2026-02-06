@@ -8,6 +8,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 
+const basePath = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
   title: "EgQCC - Egypt Quantum Computing Community",
   description: "Fostering collaboration and knowledge in quantum computing across Egypt.",
   icons: {
-    icon: "/icon.png",
+    icon: `${basePath}/assets/logo.png`,
   },
 };
 
