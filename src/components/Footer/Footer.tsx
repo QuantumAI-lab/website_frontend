@@ -1,9 +1,8 @@
-// src/components/Footer/Footer.tsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
-import { FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
+import { FaLinkedin, FaFacebook, FaYoutube, FaWhatsapp } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
@@ -102,20 +101,19 @@ export default function Footer() {
               >
                 <FaYoutube size={18} />
               </a>
-                  {/*
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-100 dark:bg-white/10 rounded-full hover:bg-gray-800 hover:text-white transition-all">
-                <FaGithub size={18} />
-              </a>
-              */}
-            </div>
 
-            {/*
-            <a href="mailto:contact@egqcc.com" className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-accent transition-colors text-sm">
-                <FaEnvelope />
-                <span>contact@egqcc.com</span>
-            </a>
-            */}
-           
+              {/* whatsApp*/}
+              <a
+                href="https://chat.whatsapp.com/DYOkJh2s1lPHnyz1MmaZ21?mode=gi_t"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp Community"
+                className="p-2 bg-gray-100 dark:bg-white/10 rounded-full hover:bg-[#25D366] hover:text-white transition-all"
+              >
+                <FaWhatsapp size={18} />
+              </a>
+            </div>
+            
           </div>
 
         </div>
