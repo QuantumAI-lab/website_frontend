@@ -97,7 +97,7 @@ export const events: Event[] = [
   {
     id: "5",
     title: "Quantum AI Lab Series - Quantum Cryptography and Security",
-    date: "2026-02-14",
+    date: "2026-02-13",
     category: "Lecture",
     location: "Online",
     status: "Upcoming",
@@ -112,7 +112,7 @@ export const events: Event[] = [
   {
     id: "6",
     title: "Quantum AI Lab Series - Quantum Machine Learning",
-    date: "2026-02-15",
+    date: "2026-02-14",
     category: "Lecture",
     location: "Online",
     status: "Upcoming",
