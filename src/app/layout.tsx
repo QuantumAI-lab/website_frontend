@@ -1,13 +1,13 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, Cairo } from "next/font/google";
-import "./globals.css";
+import "./globals.css"; 
 
 import { Providers } from "@/components/Providers/Providers";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
-
+import AnnouncementBanner from "@/components/AnnouncementBanner/AnnouncementBanner";
 const basePath = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
 
 const inter = Inter({
@@ -48,8 +48,9 @@ export default function RootLayout({
         <LocaleProvider>
           <Providers>
             <Navbar />
-            <main className="flex-grow">{children}</main>
+            <main className="grow">{children}</main>
             <Footer />
+            <AnnouncementBanner />
           </Providers>
         </LocaleProvider>
       </body>

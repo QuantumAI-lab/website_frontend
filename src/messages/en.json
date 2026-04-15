@@ -1,9 +1,9 @@
 {
   "hero": {
     "brand": "EgQCC:",
-    "headlineLine1": "Welcome to Egypt",
-    "headlineLine2": "Quantum Computing Community!",
-    "subtitle": "Fostering collaboration, democratizing knowledge, and empowering the next generation of quantum pioneers across Egypt.",
+    "headlineLine1": "Democratizing the",
+    "headlineLine2": "Quantum Leap.",
+    "subtitle": "Our mission is to empower one million students with Quantum Computing by 2026.",
     "cta": "Meet the Team"
   },
   "nav": {
@@ -12,22 +12,27 @@
     "team": "Team",
     "resources": "Resources"
   },
+  "announcement": {
+    "title": "Quantum AI Monthly Series",
+    "desc": "Join our upcoming session!",
+    "cta": "Learn More"
+  },
   "quantumIntro": {
     "title": "Why",
     "highlightedWord": "Quantum?",
     "subtitle": "We are shifting from the era of Bit to the era of Qubit. Here is how quantum computing changes the game.",
     "features": {
-      "superposition": {
-        "title": "Superposition",
-        "desc": "Unlike classical bits (0 or 1), Qubits can exist in multiple states at once, unlocking parallel processing power beyond imagination."
+      "optimization": {
+        "title": "Logistics & Optimization",
+        "desc": "Overcoming classical limitations to solve complex logistical problems for supply chains, port management, and traffic networks in a fraction of the time."
       },
-      "entanglement": {
-        "title": "Entanglement",
-        "desc": "Particles linked across space instantly affect each other. Einstein called it 'spooky action at a distance'—we call it the future of communication."
+      "security": {
+        "title": "Quantum Security",
+        "desc": "Advancing next-generation cryptography to protect regional banking, communications, and critical data infrastructure against future threats."
       },
-      "exponentialSpeed": {
-        "title": "Exponential Speed",
-        "desc": "Solving complex problems in seconds that would take today's supercomputers thousands of years to crack."
+      "simulation": {
+        "title": "Complex Simulation",
+        "desc": "Simulating molecular interactions to accelerate the discovery of new life-saving drugs, advanced materials, and ultra-efficient batteries."
       }
     }
   },
@@ -38,7 +43,7 @@
     "features": {
       "education": {
         "title": "Education & Training",
-        "desc": "From seasonal schools to internationally recognized certifications (QBronze, QNickel), we provide world-class training to master quantum computing and AI."
+        "desc": "From seasonal schools to internationally recognized certifications, we provide world-class training to master quantum computing and AI."
       },
       "events": {
         "title": "Events & Hackathons",
@@ -106,13 +111,28 @@
       "statusOpen": "Open",
       "statusClosed": "Closed",
       "sortEarliest": "Earliest Date First",
-      "sortLatest": "Latest Date First"
+      "sortLatest": "Latest Date First",
+      "fieldAll": "All (Fields)",
+      "fieldQML": "Quantum Machine Learning",
+      "fieldCommunication": "Quantum Communication",
+      "fieldAlgorithms": "Quantum Algorithms",
+      "fieldHardware": "Quantum Hardware",
+      "fieldGeneral": "General",
+      "levelAllFilter": "All (Levels)",
+      "levelBeginner": "Beginner",
+      "levelIntermediate": "Intermediate",
+      "levelAdvanced": "Advanced",
+      "levelAllLevels": "All Levels"
     }
   },
   "teamPage": {
     "titlePrefix": "Meet Our",
     "titleHighlight": "Team",
-    "subtitle": "This archive is made possible by community members who contribute their time and expertise."
+    "subtitle": "This archive is made possible by community members who contribute their time and expertise.",
+    "formerTitlePrefix": "",
+    "formerTitleHighlight": "Former",
+    "formerTitleSuffix": "Team Members",
+    "formerSubtitle": "Honoring the dedication of those who helped build the foundation of our community."
   },
   "resourcesPage": {
     "titlePrefix": "Quantum",
@@ -133,6 +153,21 @@
       "levelIntermediate": "Intermediate",
       "levelAdvanced": "Advanced",
       "levelAllLevels": "All Levels"
+    },
+    "tabs": {
+      "podcasts": "Podcasts",
+      "library": "Resource Library",
+      "roadmaps": "Learning Paths"
+    },
+    "roadmap": {
+      "selectTitle": "Choose a Career Path",
+      "estimated": "Estimated Time:",
+      "weeks": "weeks",
+      "skills": "Skills you will learn:"
+    },
+    "underConstruction": {
+      "title": "Under Construction",
+      "desc": "Our curated learning paths are currently being crafted by our community experts. Check back soon to start your structured quantum journey!"
     }
   }
 }

@@ -2,7 +2,7 @@
 "use client";
 
 import CardSection from "../Cards/Cards";
-import { FaAtom, FaProjectDiagram, FaRocket } from "react-icons/fa";
+import { FaRoute, FaShieldAlt, FaFlask } from "react-icons/fa";
 import { useMemo } from "react";
 
 import { useI18n } from "@/i18n/LocaleProvider";
@@ -13,19 +13,19 @@ export default function QuantumIntro() {
   const features = useMemo(
     () => [
       {
-        icon: <FaAtom className="text-5xl text-accent" />,
-        title: t.quantumIntro.features.superposition.title,
-        desc: t.quantumIntro.features.superposition.desc,
+        icon: <FaRoute className="text-5xl text-accent" />,
+        title: t.quantumIntro.features.optimization.title,
+        desc: t.quantumIntro.features.optimization.desc,
       },
       {
-        icon: <FaProjectDiagram className="text-5xl text-blue-400" />,
-        title: t.quantumIntro.features.entanglement.title,
-        desc: t.quantumIntro.features.entanglement.desc,
+        icon: <FaShieldAlt className="text-5xl text-blue-400" />,
+        title: t.quantumIntro.features.security.title,
+        desc: t.quantumIntro.features.security.desc,
       },
       {
-        icon: <FaRocket className="text-5xl text-purple-400" />,
-        title: t.quantumIntro.features.exponentialSpeed.title,
-        desc: t.quantumIntro.features.exponentialSpeed.desc,
+        icon: <FaFlask className="text-5xl text-purple-400" />,
+        title: t.quantumIntro.features.simulation.title,
+        desc: t.quantumIntro.features.simulation.desc,
       },
     ],
     [t],

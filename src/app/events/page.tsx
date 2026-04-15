@@ -1,19 +1,21 @@
-// from src/app/events/page.tsx
+// src/app/events/page.tsx
 "use client";
 
 import { useMemo, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { events } from "@/data/events";
+import { events, QuantumField, QuantumLevel } from "@/data/events";
 import EventCard from "@/components/EventCard/EventCard";
 import EventModal from "@/components/EventModal/EventModal";
-import { FaSearch, FaFilter, FaSortAmountDown } from "react-icons/fa";
+import { FaSearch, FaFilter, FaSortAmountDown, FaNetworkWired, FaGraduationCap } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
 type CategoryKey = "all" | "hackathon" | "workshop" | "lecture" | "meetup";
 type StatusKey = "all" | "upcoming" | "open" | "closed";
 type SortKey = "earliest" | "latest";
+type FieldKey = "all" | QuantumField;
+type LevelKey = "all" | QuantumLevel;
 
 function EventsContent() {
   const { t } = useI18n();
@@ -24,6 +26,8 @@ function EventsContent() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey>("all");
   const [selectedStatus, setSelectedStatus] = useState<StatusKey>("all");
+  const [selectedField, setSelectedField] = useState<FieldKey>("all");
+  const [selectedLevel, setSelectedLevel] = useState<LevelKey>("all");
   const [sortOrder, setSortOrder] = useState<SortKey>("earliest");
 
   const selectedEvent = useMemo(() => {
@@ -63,6 +67,31 @@ function EventsContent() {
     [t],
   );
 
+  const fieldOptions = useMemo(
+    () =>
+      [
+        { value: "all", label: t.eventsPage.filters.fieldAll },
+        { value: "QML", label: t.eventsPage.filters.fieldQML },
+        { value: "Communication", label: t.eventsPage.filters.fieldCommunication },
+        { value: "Algorithms", label: t.eventsPage.filters.fieldAlgorithms },
+        { value: "Hardware", label: t.eventsPage.filters.fieldHardware },
+        { value: "General", label: t.eventsPage.filters.fieldGeneral },
+      ] as const,
+    [t],
+  );
+
+  const levelOptions = useMemo(
+    () =>
+      [
+        { value: "all", label: t.eventsPage.filters.levelAllFilter },
+        { value: "Beginner", label: t.eventsPage.filters.levelBeginner },
+        { value: "Intermediate", label: t.eventsPage.filters.levelIntermediate },
+        { value: "Advanced", label: t.eventsPage.filters.levelAdvanced },
+        { value: "All Levels", label: t.eventsPage.filters.levelAllLevels },
+      ] as const,
+    [t],
+  );
+
   const filteredEvents = useMemo(() => {
     return events
       .filter((event) => {
@@ -78,19 +107,29 @@ function EventsContent() {
           selectedStatus === "all" ||
           event.status.toLowerCase() === selectedStatus;
 
-        return matchesSearch && matchesCategory && matchesStatus;
+        const matchesField =
+          selectedField === "all" ||
+          event.field === selectedField;
+
+        const matchesLevel =
+          selectedLevel === "all" ||
+          event.level === selectedLevel;
+
+        return matchesSearch && matchesCategory && matchesStatus && matchesField && matchesLevel;
       })
       .sort((a, b) => {
         const dateA = new Date(a.date).getTime();
         const dateB = new Date(b.date).getTime();
         return sortOrder === "earliest" ? dateA - dateB : dateB - dateA;
       });
-  }, [searchTerm, selectedCategory, selectedStatus, sortOrder]);
+  }, [searchTerm, selectedCategory, selectedStatus, selectedField, selectedLevel, sortOrder]);
 
   const clearFilters = () => {
     setSearchTerm("");
     setSelectedCategory("all");
     setSelectedStatus("all");
+    setSelectedField("all");
+    setSelectedLevel("all");
     setSortOrder("earliest");
   };
 
@@ -104,7 +143,7 @@ function EventsContent() {
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20 px-6 md:px-12">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
           <motion.h1
@@ -130,7 +169,41 @@ function EventsContent() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+            {/* Changed from grid-cols-3 to grid-cols-5, reduced gap slightly to fit everything perfectly */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-3 w-full">
+              
+              {/* Field (New) */}
+              <div className="relative">
+                <FaNetworkWired className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                <select
+                  value={selectedField}
+                  onChange={(e) => setSelectedField(e.target.value as FieldKey)}
+                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-2.5 pl-7 pr-2 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-xs text-ellipsis"
+                >
+                  {fieldOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value} className="bg-white dark:bg-black">
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Level (New) */}
+              <div className="relative">
+                <FaGraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                <select
+                  value={selectedLevel}
+                  onChange={(e) => setSelectedLevel(e.target.value as LevelKey)}
+                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-2.5 pl-7 pr-2 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-xs text-ellipsis"
+                >
+                  {levelOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value} className="bg-white dark:bg-black">
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* Category */}
               <div className="relative">
                 <FaFilter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
@@ -139,7 +212,7 @@ function EventsContent() {
                   onChange={(e) =>
                     setSelectedCategory(e.target.value as CategoryKey)
                   }
-                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-3 pl-8 pr-4 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-sm"
+                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-2.5 pl-7 pr-2 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-xs text-ellipsis"
                 >
                   {categoryOptions.map((opt) => (
                     <option
@@ -171,7 +244,7 @@ function EventsContent() {
                   onChange={(e) =>
                     setSelectedStatus(e.target.value as StatusKey)
                   }
-                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-3 pl-8 pr-4 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-sm"
+                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-2.5 pl-7 pr-2 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-xs text-ellipsis"
                 >
                   {statusOptions.map((opt) => (
                     <option
@@ -191,7 +264,7 @@ function EventsContent() {
                 <select
                   value={sortOrder}
                   onChange={(e) => setSortOrder(e.target.value as SortKey)}
-                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-3 pl-8 pr-4 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-sm"
+                  className="w-full bg-gray-100 dark:bg-white/10 rounded-lg py-2.5 pl-7 pr-2 text-gray-800 dark:text-white outline-none cursor-pointer border border-transparent hover:border-accent transition-all appearance-none text-xs text-ellipsis"
                 >
                   {sortOptions.map((opt) => (
                     <option
@@ -210,7 +283,7 @@ function EventsContent() {
 
         {/* Grid */}
         {filteredEvents.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 items-start justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start justify-items-center">
             {filteredEvents.map((event, index) => (
               <motion.div
                 key={event.id}

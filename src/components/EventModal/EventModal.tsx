@@ -38,12 +38,12 @@ const resolveImagePath = (path: string | undefined) => {
   // If we are in Production (GitHub), add the repo prefix
   const prefix = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
 
-  // Return fixed path (e.g., "/website_frontend/assets/event1.jpg")
+  // Return fixed path ( "/website_frontend/assets/event1.jpg")
   return `${prefix}${path}`;
 };
 
 export default function EventModal({ event, isOpen, onClose }: EventModalProps) {
-  const { locale, t } = useI18n();
+  const { t } = useI18n();
   const [copied, setCopied] = useState(false);
 
   // SAFE EXTRACTION START 
@@ -74,9 +74,7 @@ export default function EventModal({ event, isOpen, onClose }: EventModalProps) 
       .replace("{location}", eventLocation)
       .replace("{url}", shareUrl);
   }, [t, eventTitle, eventDate, eventLocation, shareUrl]);
-  // SAFE EXTRACTION END 
 
-  // 3. CONDITIONAL RETURN (Must be AFTER hooks)
   if (!event || !isOpen) return null;
 
   // helper to get img url
@@ -96,7 +94,7 @@ export default function EventModal({ event, isOpen, onClose }: EventModalProps) 
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-100 flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -113,8 +111,8 @@ export default function EventModal({ event, isOpen, onClose }: EventModalProps) 
       >
         <div className="relative h-48 md:h-64 w-full shrink-0">
           {/* use url */}
-          <Image src={imageUrl} alt={event.title} fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+          <Image src={imageUrl} alt={event.title} fill unoptimized={true} className="object-cover" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
 
           <button
             onClick={onClose}

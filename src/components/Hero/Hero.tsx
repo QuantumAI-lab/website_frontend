@@ -32,8 +32,7 @@ export default function Hero() {
   return (
     <section className="relative w-full min-h-[90vh] overflow-hidden bg-transparent transition-colors duration-300 px-6 md:px-12 pt-32 md:pt-20 pb-12 flex flex-col md:flex-row items-center justify-between">
       {/* Content */}
-      {/* FIX: Changed 'md:pl-10 lg:pl-20' to 'md:ps-10 lg:ps-20' (Padding Start).
-          This ensures padding is on the Left for English and on the Right for Arabic. */}
+  
       <div className="w-full md:w-1/2 z-10 md:ps-10 lg:ps-20">
         <motion.h1
           {...motionTitle}
@@ -58,7 +57,6 @@ export default function Hero() {
               className="flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-accent hover:bg-yellow-500 text-black text-lg md:text-xl font-bold rounded-full transition-transform hover:scale-105 shadow-[0_0_20px_rgba(228,168,60,0.4)]"
             >
               {t.hero.cta}
-              {/* FIX: Added 'rtl:rotate-180' to flip the arrow in Arabic */}
               <span className="text-2xl rtl:rotate-180">→</span>
             </button>
           </Link>
@@ -70,7 +68,7 @@ export default function Hero() {
         {...motionVisual}
         className="w-full md:w-1/2 relative z-0 flex justify-center md:justify-end mt-12 md:mt-0 lg:-mt-40"
       >
-        <div className="w-full h-auto max-w-[400px] md:max-w-[600px] lg:max-w-[1000px] drop-shadow-[0_0_50px_rgba(59,130,246,0.2)] dark:drop-shadow-[0_0_80px_rgba(59,130,246,0.4)]">
+        <div className="w-full h-auto max-w-100 md:max-w-150 lg:max-w-250 drop-shadow-[0_0_50px_rgba(59,130,246,0.2)] dark:drop-shadow-[0_0_80px_rgba(59,130,246,0.4)]">
           <Lottie animationData={quantumAnimation} loop autoplay />
         </div>
       </motion.div>

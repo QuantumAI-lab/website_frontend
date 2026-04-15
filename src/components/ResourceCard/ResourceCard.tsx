@@ -1,20 +1,9 @@
+// src/components/ResourceCard/ResourceCard.tsx
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Resource } from "@/data/resources";
-import { FaBook, FaGraduationCap, FaTools, FaUsers, FaNewspaper, FaExternalLinkAlt } from "react-icons/fa";
-
-// helper func (Fixes Paths for GitHub Pages)
-const resolveImagePath = (path: string) => {
-  // If it's an external link (http...), leave it alone
-  if (path.startsWith("http")) return path;
-
-  // If we are in Production (GitHub), add the repo prefix
-  const prefix = process.env.NODE_ENV === "production" ? "/website_frontend" : "";
-  
-  return `${prefix}${path}`;
-};
+import { FaBook, FaGraduationCap, FaTools, FaUsers, FaNewspaper, FaExternalLinkAlt, FaNetworkWired } from "react-icons/fa";
 
 interface ResourceCardProps {
   resource: Resource;
@@ -33,88 +22,76 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
     }
   };
 
-  const getGradient = () => {
-    switch (resource.category) {
-      case "Books": return "from-orange-400 to-red-500";
-      case "Courses": return "from-blue-400 to-indigo-600";
-      case "Tools": return "from-purple-400 to-pink-500";
-      case "Community": return "from-green-400 to-teal-600";
-      case "News": return "from-gray-500 to-gray-700";
-      default: return "from-gray-700 to-black";
-    }
-  };
-
   const getLevelColor = () => {
     switch (resource.level) {
-      case "Beginner": return "bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30";
-      case "Intermediate": return "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30";
-      case "Advanced": return "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30";
-      default: return "bg-gray-500/20 text-gray-600 dark:text-gray-400 border-gray-500/30";
+      case "Beginner": return "bg-green-500/10 text-green-600 border-green-500/20";
+      case "Intermediate": return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
+      case "Advanced": return "bg-red-500/10 text-red-600 border-red-500/20";
+      default: return "bg-purple-500/10 text-purple-600 border-purple-500/20";
     }
   };
 
   return (
-    <Link 
-      href={resource.link} 
-      target="_blank" 
-      className="group relative flex flex-col rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden"
-    >
-      
-      <div className="relative h-48 w-full overflow-hidden shrink-0">
-        {resource.image ? (
-          <>
-            <Image 
-               src={resolveImagePath(resource.image)} 
-               alt={resource.title}
-               fill
-               className="object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
-          </>
-        ) : (
-          <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getGradient()} group-hover:scale-105 transition-transform duration-500`}>
-             <div className="p-4 bg-white/20 backdrop-blur-md rounded-full shadow-inner">
-                {getIcon()}
-             </div>
-          </div>
-        )}
+    <div className="group relative bg-white dark:bg-[#111] border border-gray-100 dark:border-gray-800 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+      {/* Top Banner Area */}
+      <div className="h-32 bg-gray-900 dark:bg-black relative flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-br from-accent/20 to-transparent" />
+        <div className="z-10 transform group-hover:scale-110 transition-transform duration-500">
+          {getIcon()}
+        </div>
         
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute top-4 end-4 z-10">
             <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider text-white bg-black/50 backdrop-blur-md rounded-full border border-white/20">
                 {resource.category}
             </span>
         </div>
       </div>
-      <div className="p-6 flex flex-col flex-grow">
-                <div className="mb-3">
-             <span className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full border ${getLevelColor()}`}>
-                {resource.level}
+
+      {/* Content Area */}
+      <div className="p-6 flex flex-col grow">
+        
+        {/* NEW: Field & Level Badges */}
+        <div className="mb-3 flex flex-wrap gap-2">
+            <span className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-bold rounded-md bg-accent/10 text-accent border border-accent/20 flex items-center gap-1 w-fit">
+              <FaNetworkWired size={10} />
+              {resource.field}
+            </span>
+            <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1 w-fit ${getLevelColor()}`}>
+              <FaGraduationCap size={12} />
+              {resource.level}
             </span>
         </div>
 
-        {/* title */}
+        {/* Title */}
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-accent transition-colors line-clamp-2">
             {resource.title}
         </h3>
         
-        {/* author */}
+        {/* Author */}
         {resource.author && (
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 italic">
                 by {resource.author}
             </p>
         )}
         
-        {/* desc */}
+        {/* Desc */}
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-3 mb-4">
             {resource.description}
         </p>
 
-        {/* visit link of resource */}
-        <div className="mt-auto flex items-center text-accent text-sm font-bold gap-2 group-hover:gap-3 transition-all">
-           Visit Resource <FaExternalLinkAlt className="text-xs" />
-        </div>
-      </div>
+        {/* Spacer to push button to bottom */}
+        <div className="grow" />
 
-    </Link>
+        {/* Visit Link */}
+        <Link 
+            href={resource.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center justify-center gap-2 w-full py-2.5 bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl text-sm text-gray-900 dark:text-white transition-all font-bold"
+        >
+            Visit Resource <FaExternalLinkAlt size={12} />
+        </Link>
+      </div>
+    </div>
   );
 }

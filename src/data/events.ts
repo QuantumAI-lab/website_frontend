@@ -10,12 +10,15 @@ export interface EventResources {
   youtube?: string;
   slides?: string;
 }
-
+export type QuantumField = "QML" | "Communication" | "Algorithms" | "Hardware" | "General";
+export type QuantumLevel = "Beginner" | "Intermediate" | "Advanced" | "All Levels";
 export interface Event {
   id: string;
   title: string;
   date: string;
   category: "Workshop" | "Hackathon" | "Meetup" | "Lecture"; 
+  field: QuantumField;
+  level: QuantumLevel; 
   location: string; 
   status: "Upcoming" | "Open" | "Closed"; 
   image?: string;
@@ -31,6 +34,8 @@ export const events: Event[] = [
     title: "The Quantum AI Monthly Series",
     date: "2024-12-19",
     category: "Lecture",
+    field: "General",
+    level: "All Levels",
     location: "Online",
     status: "Closed",
     description: "A monthly series bringing together global experts to discuss Quantum AI, energy efficiency, and QPU integration.",
@@ -55,6 +60,8 @@ export const events: Event[] = [
     title: "Alexandria Quantum Hackathon 2025",
     date: "2025-07-29",
     category: "Workshop",
+    field: "QML",
+    level: "Intermediate",
     location: "Hybrid (Alexanria & Online)",
     status: "Closed",
     description: "Intensive summer program covering quantum computing fundamentals and advanced algorithms.",
@@ -68,6 +75,8 @@ export const events: Event[] = [
     title: "Alexandria Quantum Hackathon 2026",
     date: "2026-02-15",
     category: "Hackathon",
+    field: "Communication",
+    level: "Advanced",
     location: "Hybrid (Alexanria & Online)",
     status: "Upcoming",
     description: "Competitive hackathon bringing together enthusiasts to solve real-world challenges.",
@@ -79,6 +88,8 @@ export const events: Event[] = [
     title: "Quantum AI Lab Series - Quantum Computing Fundamentals",
     date: "2025-11-16",
     category: "Lecture",
+    field: "Algorithms",
+    level: "Beginner",
     location: "YouTube Series",
     status: "Closed",
     description: "Your gateway to understanding quantum foundations through hands-on labs.",
@@ -99,6 +110,8 @@ export const events: Event[] = [
     title: "Quantum AI Lab Series - Quantum Cryptography and Security",
     date: "2026-02-13",
     category: "Lecture",
+    field: "Communication", 
+    level: "Intermediate",
     location: "Online",
     status: "Upcoming",
     description: "Fundamentals of quantum cryptography and secure communication in the quantum era.",
@@ -114,6 +127,8 @@ export const events: Event[] = [
     title: "Quantum AI Lab Series - Quantum Machine Learning",
     date: "2026-02-14",
     category: "Lecture",
+    field: "QML",    
+    level: "Intermediate",
     location: "Online",
     status: "Upcoming",
     description: "Exploring the intersection of classical and quantum machine learning techniques for the future of AI.",

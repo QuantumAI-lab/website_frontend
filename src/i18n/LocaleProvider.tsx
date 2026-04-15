@@ -1,7 +1,7 @@
 // src/i18n/LocaleProvider.tsx
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, useCallback } from "react";
 import type { ReactNode } from "react";
 
 import { messages, type Locale, type Messages } from "./messages";
@@ -21,37 +21,37 @@ function isLocale(value: string): value is Locale {
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
 
-const applyDocumentLocale = (l: Locale) => {
-  const root = document.documentElement;
+  const applyDocumentLocale = useCallback((l: Locale) => {
+    const root = document.documentElement;
 
-  root.lang = l;
-  root.dir = l === "ar" ? "rtl" : "ltr";
+    root.lang = l;
+    root.dir = l === "ar" ? "rtl" : "ltr";
 
-  if (l === "ar") {
-    root.classList.add("font-ar");
-    root.classList.remove("font-en");
-  } else {
-    root.classList.add("font-en");
-    root.classList.remove("font-ar");
-  }
-};
-
+    if (l === "ar") {
+      root.classList.add("font-ar");
+      root.classList.remove("font-en");
+    } else {
+      root.classList.add("font-en");
+      root.classList.remove("font-ar");
+    }
+  }, []);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("locale");
     if (saved && isLocale(saved)) {
+      // eslint-disable-next-line
       setLocaleState(saved);
       applyDocumentLocale(saved);
     } else {
       applyDocumentLocale("en");
     }
-  }, []);
+  }, [applyDocumentLocale]);
 
-  const setLocale = (l: Locale) => {
+  const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
     window.localStorage.setItem("locale", l);
     applyDocumentLocale(l);
-  };
+  }, [applyDocumentLocale]);
 
   const value = useMemo<LocaleContextValue>(
     () => ({
@@ -59,7 +59,7 @@ const applyDocumentLocale = (l: Locale) => {
       setLocale,
       t: messages[locale],
     }),
-    [locale],
+    [locale, setLocale],
   );
 
   return (

@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-black/80 backdrop-blur-md transition-colors duration-300">
-      <div className="relative w-full max-w-[95%] 2xl:max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between py-2">
+      <div className="relative w-full max-w-[95%] 2xl:max-w-400 mx-auto px-6 md:px-12 flex items-center justify-between py-2">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse z-20">
           <div className="relative w-35 h-20">
@@ -54,7 +54,7 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <ul className="font-medium flex flex-row space-x-8 lg:space-x-12 rtl:space-x-reverse">
+          <ul className="font-medium flex flex-row gap-8 lg:gap-12">
             {navItems.map(({ key, href }) => {
               const isActive = pathname === href;
               const label = t.nav[key as NavKey];
