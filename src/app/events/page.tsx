@@ -40,8 +40,7 @@ function EventsContent() {
     { value: "hackathon", label: t.eventsPage?.filters?.categoryHackathon || "Hackathon" },
     { value: "workshop", label: t.eventsPage?.filters?.categoryWorkshop || "Workshop" },
     { value: "lecture", label: t.eventsPage?.filters?.categoryLecture || "Lecture" },
-    { value: "summer school", label: t.eventsPage?.filters?.categorySummerSchool || "Summer School" },
-    { value: "winter school", label: t.eventsPage?.filters?.categoryWinterSchool || "Winter School" },
+    { value: "school", label: t.eventsPage?.filters?.categorySchool || "School" },
   ] as const, [t]);
 
   const statusOptions = useMemo(

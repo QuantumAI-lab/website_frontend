@@ -20,7 +20,7 @@ export interface Event {
   id: string;
   title: string;
   date: string;
-category: "Workshop" | "Hackathon" | "Lecture" | "Summer school" | "Winter school";
+  category: "Workshop" | "Hackathon" | "Lecture" | "School";
   field: QuantumField;
   level: QuantumLevel; 
   location: string; 
@@ -110,7 +110,7 @@ export const events: Event[] = [
     field: "Quantum Machine Learning",    
     level: "Intermediate",
     location: "Online",
-    status: "Upcoming",
+    status: "Closed",
     description: "Exploring the intersection of classical and quantum machine learning techniques for the future of AI.",
     fullDetails: "Classical Machine Learning Review and Quantum Machine Learning This track bridges classical and quantum approaches to machine learning. It begins with a focused review of classical machine learning concepts and progresses to quantum machine learning models and hybrid techniques. Topics include Quantum Support Vector Machines (QSVM), Quantum Neural Networks (QNN), and hybrid classical quantum models.",
     speakers: [
