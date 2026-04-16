@@ -11,7 +11,7 @@ import { FaSearch, FaFilter, FaSortAmountDown, FaNetworkWired, FaGraduationCap }
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
-type CategoryKey = "all" | "hackathon" | "workshop" | "lecture" | "meetup";
+type CategoryKey = "all" | "hackathon" | "workshop" | "lecture" | "summer school" | "winter school";
 type StatusKey = "all" | "upcoming" | "open" | "closed";
 type SortKey = "earliest" | "latest";
 type FieldKey = "all" | QuantumField;
@@ -35,17 +35,14 @@ function EventsContent() {
     return events.find((e) => e.id === highlightId) || null;
   }, [highlightId]);
 
-  const categoryOptions = useMemo(
-    () =>
-      [
-        { value: "all", label: t.eventsPage.filters.categoryAll },
-        { value: "hackathon", label: t.eventsPage.filters.categoryHackathon },
-        { value: "workshop", label: t.eventsPage.filters.categoryWorkshop },
-        { value: "lecture", label: t.eventsPage.filters.categoryLecture },
-        { value: "meetup", label: t.eventsPage.filters.categoryMeetup },
-      ] as const,
-    [t],
-  );
+  const categoryOptions = useMemo(() => [
+    { value: "all", label: t.eventsPage?.filters?.categoryAll || "All Types" },
+    { value: "hackathon", label: t.eventsPage?.filters?.categoryHackathon || "Hackathon" },
+    { value: "workshop", label: t.eventsPage?.filters?.categoryWorkshop || "Workshop" },
+    { value: "lecture", label: t.eventsPage?.filters?.categoryLecture || "Lecture" },
+    { value: "summer school", label: t.eventsPage?.filters?.categorySummerSchool || "Summer School" },
+    { value: "winter school", label: t.eventsPage?.filters?.categoryWinterSchool || "Winter School" },
+  ] as const, [t]);
 
   const statusOptions = useMemo(
     () =>
@@ -71,10 +68,10 @@ function EventsContent() {
     () =>
       [
         { value: "all", label: t.eventsPage.filters.fieldAll },
-        { value: "QML", label: t.eventsPage.filters.fieldQML },
-        { value: "Communication", label: t.eventsPage.filters.fieldCommunication },
-        { value: "Algorithms", label: t.eventsPage.filters.fieldAlgorithms },
-        { value: "Hardware", label: t.eventsPage.filters.fieldHardware },
+        { value: "Introduction to quantum computing", label: t.eventsPage?.filters?.fieldIntro || "Introduction to Quantum Computing" },
+        { value: "Quantum Machine Learning", label: t.eventsPage?.filters?.fieldQML || "Quantum Machine Learning" },
+        { value: "Quantum Cryptography", label: t.eventsPage?.filters?.fieldCrypto || "Quantum Cryptography" },
+        { value: "Quantum simulations", label: t.eventsPage?.filters?.fieldSimulations || "Quantum Simulations" },
         { value: "General", label: t.eventsPage.filters.fieldGeneral },
       ] as const,
     [t],

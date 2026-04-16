@@ -22,7 +22,7 @@ export const roadmaps: Roadmap[] = [
   {
     id: "qml-path",
     title: "Quantum Machine Learning Engineer",
-    field: "QML",
+    field: "Quantum Machine Learning",
     description: "Master the intersection of classical AI and quantum mechanics, from basic gates to Quantum Neural Networks.",
     steps: [
       {
@@ -70,7 +70,7 @@ export const roadmaps: Roadmap[] = [
   {
     id: "crypto-path",
     title: "Quantum Security & Cryptography",
-    field: "Communication",
+    field: "Quantum Cryptography",
     description: "Learn how to secure tomorrow's communications against quantum threats.",
     steps: [
       {

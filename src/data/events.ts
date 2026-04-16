@@ -2,7 +2,6 @@
 export interface EventSpeaker {
   name: string;
   role: string;
-  image?: string;
 }
 
 export interface EventResources {
@@ -10,13 +9,18 @@ export interface EventResources {
   youtube?: string;
   slides?: string;
 }
-export type QuantumField = "QML" | "Communication" | "Algorithms" | "Hardware" | "General";
+export type QuantumField = 
+  | "Introduction to quantum computing" 
+  | "Quantum Machine Learning" 
+  | "Quantum Cryptography" 
+  | "Quantum simulations"
+  | "General";
 export type QuantumLevel = "Beginner" | "Intermediate" | "Advanced" | "All Levels";
 export interface Event {
   id: string;
   title: string;
   date: string;
-  category: "Workshop" | "Hackathon" | "Meetup" | "Lecture"; 
+category: "Workshop" | "Hackathon" | "Lecture" | "Summer school" | "Winter school";
   field: QuantumField;
   level: QuantumLevel; 
   location: string; 
@@ -57,38 +61,10 @@ export const events: Event[] = [
   },
   {
     id: "2",
-    title: "Alexandria Quantum Hackathon 2025",
-    date: "2025-07-29",
-    category: "Workshop",
-    field: "QML",
-    level: "Intermediate",
-    location: "Hybrid (Alexanria & Online)",
-    status: "Closed",
-    description: "Intensive summer program covering quantum computing fundamentals and advanced algorithms.",
-    fullDetails: "A full-month program targeting students, researchers, and professionals. The curriculum includes comprehensive lectures on quantum mechanics, algorithms, and hands-on coding sessions.",
-    resources: {
-      youtube: "https://youtube.com/playlist?list=PLbzgihkqSogoE3uMg5Md9J6NN6SRr9YGO&si=tYmLTHGTrvfZa0ir"
-    }
-  },
-  {
-    id: "3",
-    title: "Alexandria Quantum Hackathon 2026",
-    date: "2026-02-15",
-    category: "Hackathon",
-    field: "Communication",
-    level: "Advanced",
-    location: "Hybrid (Alexanria & Online)",
-    status: "Upcoming",
-    description: "Competitive hackathon bringing together enthusiasts to solve real-world challenges.",
-    fullDetails: "Hosted at the prestigious Bibliotheca Alexandrina. Teams will compete with mentorship from industry experts to build practical quantum applications and innovations.",
-    
-  },
-  {
-    id: "4",
     title: "Quantum AI Lab Series - Quantum Computing Fundamentals",
     date: "2025-11-16",
     category: "Lecture",
-    field: "Algorithms",
+    field: "Introduction to quantum computing",
     level: "Beginner",
     location: "YouTube Series",
     status: "Closed",
@@ -101,19 +77,19 @@ export const events: Event[] = [
       { name: "Ziad Tarek", role: "Quantum AI Lab Instructor" },
     ],
     resources: {
-      youtube: "https://www.youtube.com/playlist?list=https://youtube.com/playlist?list=PLbzgihkqSogoAmQAa3BONV1NhK-0k5Rqh&si=081m9Ub_N4bUKtQ4",
+      youtube: "https://youtube.com/playlist?list=PLbzgihkqSogoAmQAa3BONV1NhK-0k5Rqh&si=s6vPrqJuxZXc6L0I",
         github: "https://github.com/QuantumAI-lab/-QuantumAI-lab-QML-25-26"
     }
   },
   {
-    id: "5",
+    id: "3",
     title: "Quantum AI Lab Series - Quantum Cryptography and Security",
     date: "2026-02-13",
     category: "Lecture",
-    field: "Communication", 
+    field: "Quantum Cryptography", 
     level: "Intermediate",
     location: "Online",
-    status: "Upcoming",
+    status: "Closed",
     description: "Fundamentals of quantum cryptography and secure communication in the quantum era.",
     fullDetails: " Post-Quantum Cryptography (PQC) and Quantum Communication This track introduces modern quantum safe security concepts, with a focus on cryptographic systems designed to remain secure in the presence of quantum computers, as well as the fundamentals of quantum communication.",
     speakers: [
@@ -121,13 +97,17 @@ export const events: Event[] = [
       { name: "Mohamed Helmy", role: "Cybersecurity Analyst" },
       { name: "Raghade Nawar", role: "MSc in PQC" }
     ],
+    resources: {
+      youtube: "https://youtube.com/playlist?list=PLbzgihkqSogrpx3q2huhDFB7Odl-VlyNS&si=k0eCVV9kzL2ZVVko",
+        github: "https://github.com/7elmie/EGQCC"
+    }
   },
   {
-    id: "6",
+    id: "4",
     title: "Quantum AI Lab Series - Quantum Machine Learning",
     date: "2026-02-14",
     category: "Lecture",
-    field: "QML",    
+    field: "Quantum Machine Learning",    
     level: "Intermediate",
     location: "Online",
     status: "Upcoming",
@@ -138,5 +118,8 @@ export const events: Event[] = [
       { name: "Sama Samer", role: "AI Engineer, ECE Student at Helwan University" },
       { name: "Raghade Nawar", role: "MSc in PQC" }
     ],
+    resources: {
+      youtube: "https://youtube.com/playlist?list=PLbzgihkqSogrGmN8LpLd9_gFixDk6C5Vn&si=oDS-M_UfxF6L5zp2",
+    }
   }
 ];

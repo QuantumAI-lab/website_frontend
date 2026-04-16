@@ -1,8 +1,6 @@
 // src/data/team.ts
 export interface SocialLinks {
   linkedin?: string;
-  x?: string; 
-  facebook?: string;
   email?: string;
 }
 

@@ -3,8 +3,7 @@
 
 import Link from "next/link";
 import { Resource } from "@/data/resources";
-import { FaBook, FaGraduationCap, FaTools, FaUsers, FaNewspaper, FaExternalLinkAlt, FaNetworkWired } from "react-icons/fa";
-
+import { FaGraduationCap, FaNetworkWired, FaExternalLinkAlt, FaFilePowerpoint, FaVideo, FaFileAlt, FaCode } from "react-icons/fa";
 interface ResourceCardProps {
   resource: Resource;
 }
@@ -13,12 +12,11 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
   
   const getIcon = () => {
     switch (resource.category) {
-      case "Books": return <FaBook className="text-4xl text-white" />;
-      case "Courses": return <FaGraduationCap className="text-4xl text-white" />;
-      case "Tools": return <FaTools className="text-4xl text-white" />;
-      case "Community": return <FaUsers className="text-4xl text-white" />;
-      case "News": return <FaNewspaper className="text-4xl text-white" />;
-      default: return <FaBook className="text-4xl text-white" />;
+      case "Presentations": return <FaFilePowerpoint className="text-4xl text-white" />;
+      case "Recordings": return <FaVideo className="text-4xl text-white" />;
+      case "Articles": return <FaFileAlt className="text-4xl text-white" />;
+      case "Projects": return <FaCode className="text-4xl text-white" />;
+      default: return <FaExternalLinkAlt className="text-4xl text-white" />;
     }
   };
 

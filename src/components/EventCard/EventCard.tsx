@@ -87,7 +87,11 @@ export default function EventCard({ event, disableLink = false, onOpen }: EventC
             {event.title}
           </h3>
 
-          <div className="flex items-center justify-between text-gray-600 dark:text-gray-400 text-sm mt-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-2">
+            {event.description}
+          </p>
+
+          <div className="flex items-center justify-between text-gray-600 dark:text-gray-400 text-sm mt-4">
             <span className="font-medium">{event.date}</span>
             <span className="flex items-center gap-1.5 text-xs font-medium">
               <FaMapMarkerAlt className="text-accent" />

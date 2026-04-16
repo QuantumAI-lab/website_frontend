@@ -12,7 +12,7 @@ import { FaSearch, FaFilter, FaLayerGroup, FaNetworkWired, FaMapSigns, FaBook, F
 
 import { useI18n } from "@/i18n/LocaleProvider";
 
-type CategoryKey = "all" | "books" | "courses" | "tools" | "community" | "news";
+type CategoryKey = "all" | "presentations" | "recordings" | "articles" | "projects" ;
 type LevelKey = "all" | "beginner" | "intermediate" | "advanced" | "allLevels";
 type FieldKey = "all" | QuantumField;
 
@@ -23,24 +23,27 @@ function ResourcesContent() {
 
   const [activeView, setActiveView] = useState<ViewMode>("library"); 
   
-  // const [selectedRoadmapId, setSelectedRoadmapId] = useState<string>(""); // <-- ROADMAP STATE (Commented for future use)
-
+  // const [selectedRoadmapId, setSelectedRoadmapId] = useState<string>(""); // <-- ROADMAP STATE
+  
+  // Library State
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey>("all");
   const [selectedLevel, setSelectedLevel] = useState<LevelKey>("all");
   const [selectedField, setSelectedField] = useState<FieldKey>("all");
 
+  // NEW: Podcast State
+  const [podcastSearchTerm, setPodcastSearchTerm] = useState("");
+
   const categoryOptions = useMemo(() => [
-        { value: "all", label: t.resourcesPage?.filters?.categoryAll || "All Categories" },
-        { value: "books", label: t.resourcesPage?.filters?.categoryBooks || "Books" },
-        { value: "courses", label: t.resourcesPage?.filters?.categoryCourses || "Courses" },
-        { value: "tools", label: t.resourcesPage?.filters?.categoryTools || "Tools" },
-        { value: "community", label: t.resourcesPage?.filters?.categoryCommunity || "Community" },
-        { value: "news", label: t.resourcesPage?.filters?.categoryNews || "News" },
+        { value: "all", label: t.resourcesPage?.filters?.categoryAll || "All (Categories)" },
+        { value: "presentations", label: t.resourcesPage?.filters?.categoryPresentations || "Presentations" },
+        { value: "recordings", label: t.resourcesPage?.filters?.categoryRecordings || "Recordings" },
+        { value: "articles", label: t.resourcesPage?.filters?.categoryArticles || "Articles & Guides" },
+        { value: "projects", label: t.resourcesPage?.filters?.categoryProjects || "Code & Projects" },
   ] as const, [t]);
 
   const levelOptions = useMemo(() => [
-        { value: "all", label: t.resourcesPage?.filters?.levelAll || "All Levels" },
+        { value: "all", label: t.resourcesPage?.filters?.levelAll || "All (Levels)" },
         { value: "beginner", label: t.resourcesPage?.filters?.levelBeginner || "Beginner" },
         { value: "intermediate", label: t.resourcesPage?.filters?.levelIntermediate || "Intermediate" },
         { value: "advanced", label: t.resourcesPage?.filters?.levelAdvanced || "Advanced" },
@@ -48,14 +51,15 @@ function ResourcesContent() {
   ] as const, [t]);
 
   const fieldOptions = useMemo(() => [
-        { value: "all", label: t.eventsPage?.filters?.fieldAll || "All Fields" },
-        { value: "QML", label: t.eventsPage?.filters?.fieldQML || "QML" },
-        { value: "Communication", label: t.eventsPage?.filters?.fieldCommunication || "Communication" },
-        { value: "Algorithms", label: t.eventsPage?.filters?.fieldAlgorithms || "Algorithms" },
-        { value: "Hardware", label: t.eventsPage?.filters?.fieldHardware || "Hardware" },
-        { value: "General", label: t.eventsPage?.filters?.fieldGeneral || "General" },
+        { value: "all", label: t.resourcesPage?.filters?.fieldAll || "All (Fields)" },
+        { value: "Introduction to quantum computing", label: t.resourcesPage?.filters?.fieldIntro || "Introduction to Quantum Computing" },
+        { value: "Quantum Machine Learning", label: t.resourcesPage?.filters?.fieldQML || "Quantum Machine Learning" },
+        { value: "Quantum Cryptography", label: t.resourcesPage?.filters?.fieldCrypto || "Quantum Cryptography" },
+        { value: "Quantum simulations", label: t.resourcesPage?.filters?.fieldSimulations || "Quantum Simulations" },
+        { value: "General", label: t.resourcesPage?.filters?.fieldGeneral || "General" },
   ] as const, [t]);
 
+  // Library Filter Logic
   const filteredResources = useMemo(() => {
     return resources.filter((resource) => {
       const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || resource.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -66,6 +70,14 @@ function ResourcesContent() {
     });
   }, [searchTerm, selectedCategory, selectedLevel, selectedField]);
 
+  // NEW: Podcast Filter Logic
+  const filteredPodcasts = useMemo(() => {
+    return podcasts.filter((podcast) => {
+      return podcast.title.toLowerCase().includes(podcastSearchTerm.toLowerCase()) || 
+             podcast.desc.toLowerCase().includes(podcastSearchTerm.toLowerCase());
+    });
+  }, [podcastSearchTerm]);
+
   const clearFilters = () => {
     setSearchTerm("");
     setSelectedCategory("all");
@@ -73,7 +85,7 @@ function ResourcesContent() {
     setSelectedField("all");
   };
 
-  // const activeRoadmap = roadmaps.find(r => r.id === selectedRoadmapId) || null; // <-- ROADMAP DATA (Commented for future use)
+  // const activeRoadmap = roadmaps.find(r => r.id === selectedRoadmapId) || null; // <-- ROADMAP DATA
 
   return (
     <div className="relative w-full min-h-screen pt-32 pb-20 px-6 md:px-12">
@@ -131,27 +143,54 @@ function ResourcesContent() {
           {/* VIEW: PODCASTS */}
           {activeView === "podcasts" && (
             <motion.div key="podcasts" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {podcasts.map((podcast, i) => (
-                  <a key={podcast.id} href={podcast.url} target="_blank" rel="noreferrer" className="group block">
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }}
-                      className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all h-full flex flex-col"
-                    >
-                      <div className="relative h-48 w-full bg-gray-900 flex items-center justify-center overflow-hidden">
-                        <div className="absolute inset-0 bg-linear-to-br from-purple-500/20 to-black/80 z-0" />
-                        <FaPlayCircle className="text-white/80 text-6xl z-10 group-hover:scale-110 group-hover:text-accent transition-all duration-300" />
-                      </div>
-                      
-                      <div className="p-6 flex flex-col grow">
-                        <span className="text-purple-500 text-xs font-bold uppercase tracking-wider mb-2 block">{podcast.date}</span>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent transition-colors line-clamp-2">{podcast.title}</h3>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">{podcast.desc}</p>
-                      </div>
-                    </motion.div>
-                  </a>
-                ))}
+              
+              {/* NEW: Podcast Search Bar */}
+              <div className="flex flex-col gap-4 max-w-2xl mx-auto bg-white/50 dark:bg-white/5 backdrop-blur-md p-4 rounded-2xl border border-gray-200 dark:border-white/10 shadow-lg mb-10">
+                <div className="relative w-full">
+                  <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text" 
+                    placeholder={t.resourcesPage?.filters?.searchPlaceholder || "Search podcasts..."}
+                    value={podcastSearchTerm} 
+                    onChange={(e) => setPodcastSearchTerm(e.target.value)}
+                    className="w-full bg-transparent outline-none py-2 pl-10 pr-4 text-gray-800 dark:text-white transition-colors placeholder-gray-500 text-lg"
+                  />
+                </div>
               </div>
+
+              {filteredPodcasts.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredPodcasts.map((podcast, i) => (
+                    <a key={podcast.id} href={podcast.url} target="_blank" rel="noreferrer" className="group block">
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }}
+                        className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all h-full flex flex-col"
+                      >
+                        <div className="relative h-48 w-full bg-gray-900 flex items-center justify-center overflow-hidden">
+                          <div className="absolute inset-0 bg-linear-to-br from-purple-500/20 to-black/80 z-0" />
+                          <FaPlayCircle className="text-white/80 text-6xl z-10 group-hover:scale-110 group-hover:text-accent transition-all duration-300" />
+                        </div>
+                        
+                        <div className="p-6 flex flex-col grow">
+                          <span className="text-purple-500 text-xs font-bold uppercase tracking-wider mb-2 block">{podcast.date}</span>
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent transition-colors line-clamp-2">{podcast.title}</h3>
+                          <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">{podcast.desc}</p>
+                        </div>
+                      </motion.div>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center text-gray-500 mt-12 bg-white dark:bg-[#111] py-16 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800 max-w-3xl mx-auto">
+                  <p className="text-lg font-medium">No podcasts found.</p>
+                  <button 
+                    onClick={() => setPodcastSearchTerm("")} 
+                    className="mt-4 px-6 py-2 bg-purple-500/20 text-purple-500 font-bold rounded-xl hover:bg-purple-500 hover:text-white transition-colors"
+                  >
+                    Clear Search
+                  </button>
+                </div>
+              )}
             </motion.div>
           )}
 
@@ -233,8 +272,7 @@ function ResourcesContent() {
                 </p>
               </motion.div>
 
-
-              {/* REAL ROADMAP CODE (COMMENTED OUT FOR FUTURE USE)  */}
+              {/* === REAL ROADMAP CODE (COMMENTED OUT FOR FUTURE USE) === */}
               {/* <div className="flex justify-center mb-8">
                 <div className="relative w-full max-w-md">
                   <FaMapSigns className="absolute left-4 top-1/2 -translate-y-1/2 text-accent" />
