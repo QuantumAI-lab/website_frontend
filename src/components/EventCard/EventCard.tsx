@@ -70,18 +70,28 @@ export default function EventCard({ event, disableLink = false, onOpen }: EventC
       <div className="p-6 flex flex-col grow justify-between">
         <div>
           {/* Field & Level Badges */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-bold rounded-md bg-accent/10 text-accent border border-accent/20 flex items-center gap-1 w-fit">
+        <div className="flex flex-wrap gap-2 mb-3">
+          {(Array.isArray(event.field) ? event.field : [event.field]).map((f, index) => (
+            <span
+              key={index}
+              className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-bold rounded-md bg-accent/10 text-accent border border-accent/20 flex items-center gap-1 w-fit"
+            >
               <FaNetworkWired size={10} />
-              {event.field}
+              {f}
             </span>
-            
-            {/* Applied dynamic colors */}
-            <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1 w-fit ${getLevelColor()}`}>
+          ))}
+
+          {(Array.isArray(event.level) ? event.level : [event.level]).map((l, index) => (
+            <span
+              key={index}
+              className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1 w-fit ${getLevelColor(l)}`}
+            >
               <FaGraduationCap size={12} />
-              {event.level}
+              {l}
             </span>
-          </div>
+          ))}
+        </div>
+
 
           <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-tight mb-2 line-clamp-2">
             {event.title}

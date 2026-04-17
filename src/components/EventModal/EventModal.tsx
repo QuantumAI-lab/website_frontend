@@ -16,6 +16,7 @@ import {
   FaLink,
   FaCheck,
   FaEnvelope,
+  
 } from "react-icons/fa";
 
 import { useI18n } from "@/i18n/LocaleProvider";
@@ -219,6 +220,28 @@ export default function EventModal({ event, isOpen, onClose }: EventModalProps) 
                         className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-red-500 transition-colors"
                       >
                         <FaYoutube className="text-xl" /> <span>YouTube</span>
+                      </a>
+                    )}
+
+                    {event.resources.Link && (
+                      <a
+                        href={event.resources.Link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-red-500 transition-colors"
+                      >
+                        <FaLink className="text-xl" /> <span>Link</span>
+                      </a>
+                    )}
+
+                    {event.resources.Linkedin && (
+                      <a
+                        href={event.resources.Linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-red-500 transition-colors"
+                      >
+                        <FaLinkedin className="text-xl" /> <span>Linkedin</span>
                       </a>
                     )}
 

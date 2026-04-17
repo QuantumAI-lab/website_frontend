@@ -36,12 +36,15 @@ function EventsContent() {
   }, [highlightId]);
 
   const categoryOptions = useMemo(() => [
-    { value: "all", label: t.eventsPage?.filters?.categoryAll || "All Types" },
-    { value: "hackathon", label: t.eventsPage?.filters?.categoryHackathon || "Hackathon" },
-    { value: "workshop", label: t.eventsPage?.filters?.categoryWorkshop || "Workshop" },
-    { value: "lecture", label: t.eventsPage?.filters?.categoryLecture || "Lecture" },
-    { value: "school", label: t.eventsPage?.filters?.categorySchool || "School" },
-  ] as const, [t]);
+  { value: "all", label: t.eventsPage?.filters?.categoryAll },
+  { value: "hackathon", label: "Hackathon"},
+  { value: "workshop", label: "Workshop" },
+  { value: "lecture", label: "Lecture" },
+  { value: "school", label: "School"},
+  { value: "seminar", label: "Seminar"},
+  { value: "Educational Series", label: "Educational Series"},
+  { value: "Industry Sessions", label: "Industry Sessions"}
+] as const, [t]);
 
   const statusOptions = useMemo(
     () =>
@@ -63,18 +66,23 @@ function EventsContent() {
     [t],
   );
 
-  const fieldOptions = useMemo(
-    () =>
-      [
-        { value: "all", label: t.eventsPage.filters.fieldAll },
-        { value: "Introduction to quantum computing", label: t.eventsPage?.filters?.fieldIntro || "Introduction to Quantum Computing" },
-        { value: "Quantum Machine Learning", label: t.eventsPage?.filters?.fieldQML || "Quantum Machine Learning" },
-        { value: "Quantum Cryptography", label: t.eventsPage?.filters?.fieldCrypto || "Quantum Cryptography" },
-        { value: "Quantum simulations", label: t.eventsPage?.filters?.fieldSimulations || "Quantum Simulations" },
-        { value: "General", label: t.eventsPage.filters.fieldGeneral },
-      ] as const,
-    [t],
-  );
+  const fieldOptions = useMemo(() => [
+  { value: "all", label: t.eventsPage.filters.fieldAll },
+  { value: "Quantum Machine Learning", label: "Quantum Machine Learning" },
+  { value: "Quantum Cryptography", label: "Quantum Cryptography" },
+  { value: "Quantum simulations", label: "Quantum Simulations" },
+  { value: "General", label: "General" },
+  { value: "Artificial Intelligence", label: "Artificial Intelligence" },
+  { value: "Quantum Neural Networks", label: "Quantum Neural Networks" },
+  { value: "Data Science", label: "Data Science" },
+  { value: "Hybrid Classical–Quantum Models", label: "Hybrid Classical–Quantum Models" },
+  { value: "Quantum Support Vector Machines", label: "Quantum Support Vector Machines" },
+  { value: "Career Development", label: "Career Development" },
+  { value: "Quantum Industry", label: "Quantum Industry" },
+  { value: "Quantum optimization", label: "Quantum Optimization" },
+  { value: "Quantum chemistry", label: "Quantum Chemistry" },
+  { value: "Quantum computing", label: "Quantum Computing" },
+] as const, [t]);
 
   const levelOptions = useMemo(
     () =>
@@ -105,11 +113,15 @@ function EventsContent() {
 
         const matchesField =
           selectedField === "all" ||
-          event.field === selectedField;
+          (Array.isArray(event.field)
+            ? event.field.includes(selectedField)
+            : event.field === selectedField);
 
-        const matchesLevel =
-          selectedLevel === "all" ||
-          event.level === selectedLevel;
+      const matchesLevel =
+        selectedLevel === "all" ||
+        (Array.isArray(event.level)
+          ? event.level.includes(selectedLevel)
+          : event.level === selectedLevel);
 
         return matchesSearch && matchesCategory && matchesStatus && matchesField && matchesLevel;
       })
