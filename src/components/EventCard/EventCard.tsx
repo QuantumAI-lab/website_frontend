@@ -84,7 +84,7 @@ export default function EventCard({ event, disableLink = false, onOpen }: EventC
           {(Array.isArray(event.level) ? event.level : [event.level]).map((l, index) => (
             <span
               key={index}
-              className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1 w-fit ${getLevelColor(l)}`}
+              className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1 w-fit ${getLevelColor()}`}
             >
               <FaGraduationCap size={12} />
               {l}
